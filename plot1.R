@@ -15,7 +15,6 @@ household_power_consumption <- read.csv(
 
 #format dates
 household_power_consumption$Date <-as.Date(household_power_consumption$Date, format="%d/%m/%Y")
-household_power_consumption$DateTime <- as.POSIXlt(paste(strftime(household_power_consumption$Date, format="%Y-%m-%d"), household_power_consumption$Time))
 
 #subset to only the two days
 days <- c(as.Date("2007-02-01"), as.Date("2007-02-02"))
@@ -24,6 +23,7 @@ days <- c(as.Date("2007-02-01"), as.Date("2007-02-02"))
 
 household_power_consumption <- subset(household_power_consumption,
        household_power_consumption$Date %in% days)
+household_power_consumption$DateTime <- as.POSIXlt(paste(strftime(household_power_consumption$Date, format="%Y-%m-%d"), household_power_consumption$Time))
 
 
 
@@ -33,5 +33,7 @@ png(filename = "plot1.png",
 hist(household_power_consumption$Global_active_power, 
      xlab = "Global Active Power (kilowatts)", 
      col="red", 
-     main="Global Active Power")
+     main="Global Active Power"
+     )
 dev.off()
+
